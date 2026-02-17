@@ -26,3 +26,10 @@ jobs:
     - name: Run app check
       run: |
         python -c "import flask; print('Flask installed successfully')"
+
+          - name: Slack Notification
+            if: always()
+            run: |
+              curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"GitHub Actions build finished"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
